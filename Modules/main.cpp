@@ -8,7 +8,7 @@
 using namespace std;
 
 //Energy range (in keV)
-double energy_start = 0.300;
+double energy_start = 0.010;
 double energy_end = 10.000;
 double energy_step = 0.010;
 
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
     
     
     //Reads in CHIANTI database
-    fstream spectrum_file("../Inputs/CHIANTI_line.dat", fstream::in);
+    fstream spectrum_file("../Inputs/CHIANTI_line_full.dat", fstream::in);
     
     int row;
     spectrum_file >> row;
@@ -49,11 +49,10 @@ int main(int argc, char *argv[]){
     double spectral_intensity[row];
     for (int l=0; l<row; l++){
         
-        spectral_energy[l] = 12400/spectrum_input[l][0] /1000 ;
-            //converts from Ang to keV
+        spectral_energy[l] = 12400.0/spectrum_input[l][0] /1000.0 ;
+        //converts from Ang to keV
         spectral_intensity[l] = spectrum_input[l][1]; }
-    
-    
+  
     //creates a solar spectrum and populates it with gaussians extracted from the
     //CHIANTI database
     vector<double> solar_spectrum(energy_row, 0);
